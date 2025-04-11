@@ -21,7 +21,10 @@
       "default": "./dist/plugin.js"
     }
   },
-  "files": ["dist", "types"],
+  "files": [
+    "dist",
+    "types"
+  ],
   "bin": {
     "cypress-image-diff": "./bin/cypress-image-diff.js"
   },
@@ -98,5 +101,6 @@
     "set-value": ">=4.0.1",
     "tmpl": ">=1.0.5",
     "minimist": ">=1.2.6"
-  }
+  },
+  "packageManager": "npm@10.9.2"
 }

@@ -1,8 +1,16 @@
 node_modules
-
+dist
 # test
 cypress-image-diff-screenshots/comparison
 cypress-image-diff-screenshots/diff
 cypress-image-diff-html-report
 cypress/videos
 cypress/fixtures
+
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
