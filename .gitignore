@@ -1,5 +1,4 @@
 node_modules
-dist
 
 # test
 cypress-image-diff-screenshots/comparison
