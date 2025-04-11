@@ -3,11 +3,6 @@ import merge from 'lodash/merge'
 import fs from 'fs-extra'
 import DEFAULT_CONFIG from './config.default'
 
-function grab(flag) {
-  const index = process.argv.indexOf(flag);
-  return (index === -1) ? null : process.argv[index + 1];
-}
-
 function getUserConfigFile() {
   try {
     if (fs.existsSync(path.join(process.cwd(), 'cypress-image-diff.config.cjs'))) {
@@ -21,9 +16,7 @@ function getUserConfigFile() {
   }
 }
 
-
-const configJson = grab('--cypress-image-config-json');
-export const userConfig = merge({}, DEFAULT_CONFIG, getUserConfigFile(), JSON.parse(configJson))
+export const userConfig = merge({}, DEFAULT_CONFIG, getUserConfigFile(), JSON.parse(process.env.CYPRESS_IMAGE_CONFIG_JSON))
 
 export class Paths {
   constructor(config) {
