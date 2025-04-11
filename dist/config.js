@@ -33,7 +33,9 @@ function getUserConfigFile() {
   }
 }
 
-var userConfig = (0, _merge["default"])({}, _config["default"], getUserConfigFile(), JSON.parse(process.env.CYPRESS_IMAGE_CONFIG_JSON));
+var userConfig = (0, _merge["default"])({}, _config["default"], getUserConfigFile(), process.env.CYPRESS_IMAGE_CONFIG_JSON ? JSON.parse(process.env.CYPRESS_IMAGE_CONFIG_JSON) : {}, process.env.CYPRESS_IMAGE_ROOT_DIR ? {
+  ROOT_DIR: process.env.CYPRESS_IMAGE_ROOT_DIR
+} : {});
 exports.userConfig = userConfig;
 
 var Paths = /*#__PURE__*/function () {

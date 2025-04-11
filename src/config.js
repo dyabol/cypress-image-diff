@@ -16,7 +16,13 @@ function getUserConfigFile() {
   }
 }
 
-export const userConfig = merge({}, DEFAULT_CONFIG, getUserConfigFile(), JSON.parse(process.env.CYPRESS_IMAGE_CONFIG_JSON))
+export const userConfig = merge(
+  {},
+  DEFAULT_CONFIG,
+  getUserConfigFile(),
+  process.env.CYPRESS_IMAGE_CONFIG_JSON ? JSON.parse(process.env.CYPRESS_IMAGE_CONFIG_JSON) : {},
+  process.env.CYPRESS_IMAGE_ROOT_DIR ? { ROOT_DIR: process.env.CYPRESS_IMAGE_ROOT_DIR } : {}
+)
 
 export class Paths {
   constructor(config) {
