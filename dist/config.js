@@ -19,11 +19,6 @@ var _fsExtra = _interopRequireDefault(require("fs-extra"));
 
 var _config = _interopRequireDefault(require("./config.default"));
 
-function grab(flag) {
-  var index = process.argv.indexOf(flag);
-  return index === -1 ? null : process.argv[index + 1];
-}
-
 function getUserConfigFile() {
   try {
     if (_fsExtra["default"].existsSync(_path["default"].join(process.cwd(), 'cypress-image-diff.config.cjs'))) {
@@ -38,8 +33,7 @@ function getUserConfigFile() {
   }
 }
 
-var configJson = grab('--cypress-image-config-json');
-var userConfig = (0, _merge["default"])({}, _config["default"], getUserConfigFile(), JSON.parse(configJson));
+var userConfig = (0, _merge["default"])({}, _config["default"], getUserConfigFile(), JSON.parse(process.env.CYPRESS_IMAGE_CONFIG_JSON));
 exports.userConfig = userConfig;
 
 var Paths = /*#__PURE__*/function () {
