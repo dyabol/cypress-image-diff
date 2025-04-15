@@ -22,6 +22,10 @@ var _path = require('path');
 
 var _path2 = _interopRequireDefault(_path);
 
+var _regeneratorRuntime = require("regenerator-runtime");
+
+var _regeneratorRuntime2 = _interopRequireDefault(_regeneratorRuntime);
+
 var _utils = require('./utils');
 
 var _config = require('./config');
@@ -85,7 +89,7 @@ var deleteScreenshot = function deleteScreenshot(args) {
 
 var getStatsComparisonAndPopulateDiffIfAny = function getStatsComparisonAndPopulateDiffIfAny(args) {
   var baselineImg, comparisonImg, diff, baselineFullCanvas, comparisonFullCanvas, pixelMismatchResult, percentage, testFailed;
-  return regeneratorRuntime.async(function getStatsComparisonAndPopulateDiffIfAny$(context$1$0) {
+  return _regeneratorRuntime2['default'].async(function getStatsComparisonAndPopulateDiffIfAny$(context$1$0) {
     var _this = this;
 
     while (1) switch (context$1$0.prev = context$1$0.next) {
@@ -93,7 +97,7 @@ var getStatsComparisonAndPopulateDiffIfAny = function getStatsComparisonAndPopul
         baselineImg = undefined;
         context$1$0.prev = 1;
         context$1$0.next = 4;
-        return regeneratorRuntime.awrap((0, _utils.parseImage)(_config2['default'].image.baseline(args.testName)));
+        return _regeneratorRuntime2['default'].awrap((0, _utils.parseImage)(_config2['default'].image.baseline(args.testName)));
 
       case 4:
         baselineImg = context$1$0.sent;
@@ -109,7 +113,7 @@ var getStatsComparisonAndPopulateDiffIfAny = function getStatsComparisonAndPopul
         comparisonImg = undefined;
         context$1$0.prev = 11;
         context$1$0.next = 14;
-        return regeneratorRuntime.awrap((0, _utils.parseImage)(_config2['default'].image.comparison(args.testName)));
+        return _regeneratorRuntime2['default'].awrap((0, _utils.parseImage)(_config2['default'].image.comparison(args.testName)));
 
       case 14:
         comparisonImg = context$1$0.sent;
@@ -127,12 +131,12 @@ var getStatsComparisonAndPopulateDiffIfAny = function getStatsComparisonAndPopul
           height: Math.max(comparisonImg.height, baselineImg.height)
         });
         context$1$0.next = 23;
-        return regeneratorRuntime.awrap((0, _utils.adjustCanvas)(baselineImg, diff.width, diff.height));
+        return _regeneratorRuntime2['default'].awrap((0, _utils.adjustCanvas)(baselineImg, diff.width, diff.height));
 
       case 23:
         baselineFullCanvas = context$1$0.sent;
         context$1$0.next = 26;
-        return regeneratorRuntime.awrap((0, _utils.adjustCanvas)(comparisonImg, diff.width, diff.height));
+        return _regeneratorRuntime2['default'].awrap((0, _utils.adjustCanvas)(comparisonImg, diff.width, diff.height));
 
       case 26:
         comparisonFullCanvas = context$1$0.sent;
@@ -146,15 +150,15 @@ var getStatsComparisonAndPopulateDiffIfAny = function getStatsComparisonAndPopul
         }
 
         context$1$0.next = 33;
-        return regeneratorRuntime.awrap((function callee$1$0() {
+        return _regeneratorRuntime2['default'].awrap((function callee$1$0() {
           var stream;
-          return regeneratorRuntime.async(function callee$1$0$(context$2$0) {
+          return _regeneratorRuntime2['default'].async(function callee$1$0$(context$2$0) {
             while (1) switch (context$2$0.prev = context$2$0.next) {
               case 0:
                 _fsExtra2['default'].ensureFileSync(_config2['default'].image.diff(args.testName));
                 stream = diff.pack().pipe(_fsExtra2['default'].createWriteStream(_config2['default'].image.diff(args.testName)));
                 context$2$0.next = 4;
-                return regeneratorRuntime.awrap(new Promise(function (resolve, reject) {
+                return _regeneratorRuntime2['default'].awrap(new Promise(function (resolve, reject) {
                   stream.once('finish', resolve);
                   stream.once('error', reject);
                 }));
@@ -179,11 +183,11 @@ var getStatsComparisonAndPopulateDiffIfAny = function getStatsComparisonAndPopul
 function compareSnapshotsPlugin(args) {
   var _ref, percentage, testFailed, newTest, _ref2, _ref22, baselineDataUrl, diffDataUrl, comparisonDataUrl;
 
-  return regeneratorRuntime.async(function compareSnapshotsPlugin$(context$1$0) {
+  return _regeneratorRuntime2['default'].async(function compareSnapshotsPlugin$(context$1$0) {
     while (1) switch (context$1$0.prev = context$1$0.next) {
       case 0:
         context$1$0.next = 2;
-        return regeneratorRuntime.awrap(getStatsComparisonAndPopulateDiffIfAny(args));
+        return _regeneratorRuntime2['default'].awrap(getStatsComparisonAndPopulateDiffIfAny(args));
 
       case 2:
         _ref = context$1$0.sent;
@@ -207,7 +211,7 @@ function compareSnapshotsPlugin(args) {
         }
 
         context$1$0.next = 9;
-        return regeneratorRuntime.awrap(Promise.all([(0, _utils.toBase64)(newTest.baselinePath), (0, _utils.toBase64)(newTest.diffPath), (0, _utils.toBase64)(newTest.comparisonPath)]));
+        return _regeneratorRuntime2['default'].awrap(Promise.all([(0, _utils.toBase64)(newTest.baselinePath), (0, _utils.toBase64)(newTest.diffPath), (0, _utils.toBase64)(newTest.comparisonPath)]));
 
       case 9:
         _ref2 = context$1$0.sent;
@@ -237,7 +241,7 @@ function compareSnapshotsPlugin(args) {
 
 var generateJsonReport = function generateJsonReport(results) {
   var testsMappedBySpecPath, suites, totalPassed, stats, jsonFilename, jsonPath;
-  return regeneratorRuntime.async(function generateJsonReport$(context$1$0) {
+  return _regeneratorRuntime2['default'].async(function generateJsonReport$(context$1$0) {
     while (1) switch (context$1$0.prev = context$1$0.next) {
       case 0:
         testsMappedBySpecPath = testStatuses.reduce(function (map, item) {
@@ -279,7 +283,7 @@ var generateJsonReport = function generateJsonReport(results) {
         }
 
         context$1$0.next = 9;
-        return regeneratorRuntime.awrap(_fsExtra2['default'].writeFile(jsonPath, JSON.stringify(stats, null, 2)));
+        return _regeneratorRuntime2['default'].awrap(_fsExtra2['default'].writeFile(jsonPath, JSON.stringify(stats, null, 2)));
 
       case 9:
         context$1$0.next = 13;
@@ -287,7 +291,7 @@ var generateJsonReport = function generateJsonReport(results) {
 
       case 11:
         context$1$0.next = 13;
-        return regeneratorRuntime.awrap((0, _utils.writeFileIncrement)(jsonPath, JSON.stringify(stats, null, 2)));
+        return _regeneratorRuntime2['default'].awrap((0, _utils.writeFileIncrement)(jsonPath, JSON.stringify(stats, null, 2)));
 
       case 13:
       case 'end':
@@ -352,7 +356,7 @@ var getCompareSnapshotsPlugin = function getCompareSnapshotsPlugin(on, config) {
   });
 
   on('after:run', function callee$1$0(results) {
-    return regeneratorRuntime.async(function callee$1$0$(context$2$0) {
+    return _regeneratorRuntime2['default'].async(function callee$1$0$(context$2$0) {
       while (1) switch (context$2$0.prev = context$2$0.next) {
         case 0:
           if (!_config.userConfig.JSON_REPORT) {
@@ -361,7 +365,7 @@ var getCompareSnapshotsPlugin = function getCompareSnapshotsPlugin(on, config) {
           }
 
           context$2$0.next = 3;
-          return regeneratorRuntime.awrap(generateJsonReport(results));
+          return _regeneratorRuntime2['default'].awrap(generateJsonReport(results));
 
         case 3:
         case 'end':

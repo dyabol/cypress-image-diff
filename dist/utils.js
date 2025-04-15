@@ -18,6 +18,10 @@ var _path2 = _interopRequireDefault(_path);
 
 var _pngjs = require('pngjs');
 
+var _regeneratorRuntime = require("regenerator-runtime");
+
+var _regeneratorRuntime2 = _interopRequireDefault(_regeneratorRuntime);
+
 var createDir = function createDir(dirs) {
   dirs.forEach(function (dir) {
     if (!_fsExtra2['default'].existsSync(dir)) {
@@ -60,7 +64,7 @@ var renameAndCopyFile = function renameAndCopyFile(originalFilePath, newFilePath
 };
 
 var parseImage = function parseImage(image) {
-  return regeneratorRuntime.async(function parseImage$(context$1$0) {
+  return _regeneratorRuntime2['default'].async(function parseImage$(context$1$0) {
     while (1) switch (context$1$0.prev = context$1$0.next) {
       case 0:
         return context$1$0.abrupt('return', new Promise(function (resolve, reject) {
@@ -84,7 +88,7 @@ var parseImage = function parseImage(image) {
 
 var adjustCanvas = function adjustCanvas(image, width, height) {
   var imageAdjustedCanvas;
-  return regeneratorRuntime.async(function adjustCanvas$(context$1$0) {
+  return _regeneratorRuntime2['default'].async(function adjustCanvas$(context$1$0) {
     while (1) switch (context$1$0.prev = context$1$0.next) {
       case 0:
         if (!(image.width === width && image.height === height)) {
@@ -126,7 +130,7 @@ var getCleanDate = function getCleanDate(date) {
 var writeFileIncrement = function writeFileIncrement(name, data) {
   var increment = arguments.length <= 2 || arguments[2] === undefined ? 1 : arguments[2];
   var filename, absolutePath;
-  return regeneratorRuntime.async(function writeFileIncrement$(context$1$0) {
+  return _regeneratorRuntime2['default'].async(function writeFileIncrement$(context$1$0) {
     while (1) switch (context$1$0.prev = context$1$0.next) {
       case 0:
         filename = '' + _path2['default'].basename(name, _path2['default'].extname(name)) + (increment >= 2 ? '_' + increment : '') + _path2['default'].extname(name);
@@ -151,7 +155,7 @@ var writeFileIncrement = function writeFileIncrement(name, data) {
 
 var toBase64 = function toBase64(relativePath) {
   var absolutePath, content;
-  return regeneratorRuntime.async(function toBase64$(context$1$0) {
+  return _regeneratorRuntime2['default'].async(function toBase64$(context$1$0) {
     while (1) switch (context$1$0.prev = context$1$0.next) {
       case 0:
         if (!(relativePath === '')) {
@@ -164,7 +168,7 @@ var toBase64 = function toBase64(relativePath) {
       case 2:
         absolutePath = _path2['default'].join(process.cwd(), relativePath);
         context$1$0.next = 5;
-        return regeneratorRuntime.awrap(_fsExtra2['default'].readFile(absolutePath, { encoding: 'base64' }));
+        return _regeneratorRuntime2['default'].awrap(_fsExtra2['default'].readFile(absolutePath, { encoding: 'base64' }));
 
       case 5:
         content = context$1$0.sent;
