@@ -2,6 +2,7 @@ import fs from 'fs-extra'
 import pixelmatch from 'pixelmatch'
 import { PNG } from 'pngjs'
 import path from 'path'
+import regeneratorRuntime from "regenerator-runtime";
 
 import {
   createDir,
@@ -47,7 +48,7 @@ const copyScreenshot = args => {
   if (!fs.existsSync(paths.image.baseline(args.testName))) {
     fs.copySync(paths.image.comparison(args.testName), paths.image.baseline(args.testName))
   }
-  
+
   return true
 }
 
@@ -104,7 +105,7 @@ const getStatsComparisonAndPopulateDiffIfAny = async (args) => {
     diff.height,
     userConfig.COMPARISON_OPTIONS
   )
-  
+
   const percentage = (pixelMismatchResult / diff.width / diff.height) ** 0.5
   const testFailed = percentage > args.testThreshold
 
@@ -128,7 +129,7 @@ async function compareSnapshotsPlugin(args) {
   const { percentage, testFailed } = await getStatsComparisonAndPopulateDiffIfAny(args)
 
   // Saving test status object to build report if task is triggered
-  let newTest = new TestStatus({ 
+  let newTest = new TestStatus({
     status: !testFailed,
     name: args.testName,
     percentage,
@@ -175,7 +176,7 @@ const generateJsonReport = async (results) => {
   }, {})
 
   const suites = Object.values(testsMappedBySpecPath)
-  const totalPassed = testStatuses.filter(t => t.status === 'pass' ).length
+  const totalPassed = testStatuses.filter(t => t.status === 'pass').length
 
   const stats = {
     total: testStatuses.length,
@@ -192,14 +193,14 @@ const generateJsonReport = async (results) => {
   }
 
   const jsonFilename = userConfig.JSON_REPORT.FILENAME
-  ? `${userConfig.JSON_REPORT.FILENAME}.json`
-  : `report_${getCleanDate(stats.startedAt)}.json`
+    ? `${userConfig.JSON_REPORT.FILENAME}.json`
+    : `report_${getCleanDate(stats.startedAt)}.json`
 
   const jsonPath = path.join(paths.reportDir, jsonFilename)
   if (userConfig.JSON_REPORT.OVERWRITE) {
-   await fs.writeFile(jsonPath, JSON.stringify(stats, null, 2))
+    await fs.writeFile(jsonPath, JSON.stringify(stats, null, 2))
   } else {
-   await writeFileIncrement(jsonPath, JSON.stringify(stats, null, 2))
+    await writeFileIncrement(jsonPath, JSON.stringify(stats, null, 2))
   }
 }
 

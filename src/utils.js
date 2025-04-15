@@ -1,11 +1,12 @@
 import fs from 'fs-extra'
 import path from 'path'
 import { PNG } from 'pngjs'
+import regeneratorRuntime from "regenerator-runtime";
 
 const createDir = dirs => {
   dirs.forEach(dir => {
     if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir, {recursive: true})
+      fs.mkdirSync(dir, { recursive: true })
     }
   })
 }
@@ -36,11 +37,11 @@ const setFilePermission = (dir, permission) => {
 }
 
 const renameAndMoveFile = (originalFilePath, newFilePath) => {
-  fs.moveSync(originalFilePath, newFilePath, {overwrite: true})
+  fs.moveSync(originalFilePath, newFilePath, { overwrite: true })
 }
 
 const renameAndCopyFile = (originalFilePath, newFilePath) => {
-  fs.copySync(originalFilePath, newFilePath, {overwrite: true})
+  fs.copySync(originalFilePath, newFilePath, { overwrite: true })
 }
 
 const parseImage = async image => {
@@ -49,7 +50,7 @@ const parseImage = async image => {
     fd.on('error', (error) => reject(error))
       .pipe(new PNG())
       // eslint-disable-next-line func-names
-      .on('parsed', function() {
+      .on('parsed', function () {
         const that = this
         resolve(that)
       })
@@ -88,9 +89,8 @@ const getCleanDate = (date) => {
 }
 
 const writeFileIncrement = async (name, data, increment = 1) => {
-  const filename = `${path.basename(name, path.extname(name))}${
-    increment >= 2 ? `_${increment}` : ''
-  }${path.extname(name)}`
+  const filename = `${path.basename(name, path.extname(name))}${increment >= 2 ? `_${increment}` : ''
+    }${path.extname(name)}`
 
   const absolutePath = path.join(path.dirname(name), filename)
   if (fs.existsSync(absolutePath) === false) return fs.writeFile(absolutePath, data)
